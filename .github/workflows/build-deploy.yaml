@@ -30,12 +30,7 @@ jobs:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
 
-            BRANCH=$GITHUB_REF
-            BRANCH=${BRANCH#refs/*/}
-            BRANCH=${BRANCH//\//-}
-
             az storage azcopy blob sync \
               --container "\$web" \
-              --destination "${BRANCH}" \
               --source "_site"
               --connection-string "${{ secrets.CONNECTION_STRING }}"
