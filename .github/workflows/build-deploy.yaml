@@ -23,6 +23,8 @@ jobs:
       - run: make build
         name: Build sources
 
+
+
       - uses: azure/CLI@v1
         name: Deploy
         with:
@@ -32,5 +34,5 @@ jobs:
 
             az storage azcopy blob sync \
               --container "\$web" \
-              --source "_site"
+              --source "_site" \
               --connection-string "${{ secrets.CONNECTION_STRING }}"
