@@ -25,8 +25,6 @@ jobs:
 
       - uses: azure/CLI@v1
         name: Deploy
-        env:
-          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.CONNECTION_STRING }}
         with:
           azcliversion: 2.53.0
           inlineScript: |
@@ -40,3 +38,4 @@ jobs:
               --container "\$web" \
               --destination "${BRANCH}" \
               --source "_site"
+              --connection-string "${{ secrets.CONNECTION_STRING }}"
