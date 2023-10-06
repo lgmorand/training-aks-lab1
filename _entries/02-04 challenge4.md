@@ -104,6 +104,29 @@ kubectl get nodes
 
 {% endcollapsible %}
 
+Try some other commands like. Try to find them from the [documentation](https://kubernetes.io/docs/home/) or in the [cheatsheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet)
+
+* List all namespaces
+* List pods in namespace system
+* List pods in all namespaces
+* List all elements in namespace system
+
+{% collapsible %}
+
+```sh
+kubectl get namespaces
+kubectl get ns
+
+kubectl get pods -n system
+
+kubectl get pods --all-namespaces
+kubectl get pods -A
+
+kubectl get all -n system
+```
+
+{% endcollapsible %}
+
 > **Resources**
 >
 > * <https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough>
