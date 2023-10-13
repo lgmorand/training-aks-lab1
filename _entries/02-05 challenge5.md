@@ -5,7 +5,58 @@ title: Deploying the app to AKS (20m)
 parent-id: upandrunning
 ---
 
-In this challenge, you will deploy the web app that you have built and ran locally into the Kubernetes cluster that you created in the previous challenge.
+In this section, you will import an image (web app) from a public repository in your Azure Container registry and then deploy this web app in your AKS cluster.
+
+#### Import an image in ACR
+
+**Task Hints**
+
+* It's recommended to use the Azure CLI and the `az acr import` command to import the image in your ACR. Refer to [ACR import image](https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-import()), or run `az acr import -h` for details
+* The image that will be imported is in [docker hub](https://hub.docker.com/r/paulbouwer/hello-kubernetes), please use tag 1.10.1
+* Rename the image to hello-kubernetes, tag 1.10.1
+
+Import image to ACR
+
+{% collapsible %}
+
+```sh
+az acr import \
+  --name <registry_name> \
+  --source docker.io/paulbouwer/hello-kubernetes:1.10.1 \
+  --image hello-kubernetes:1.10.1
+```
+
+{% endcollapsible %}
+
+Check that your image was successfully imported.
+
+{% collapsible %}
+
+```sh
+az acr repository list --name <registry_name>
+```
+
+You should see an output similar to:
+
+```sh
+[
+  "hello-kubernetes"
+]
+```
+
+```sh
+az acr repository show-tags -n <registry_name> --repository hello-kubernetes
+```
+
+You should see an output similar to:
+
+```sh
+[
+  "1.10.1"
+]
+```
+
+{% endcollapsible %}
 
 #### Create a deployment manifest
 

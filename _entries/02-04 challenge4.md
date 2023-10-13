@@ -19,9 +19,10 @@ Create ACR
 {% collapsible %}
 
 ```sh
-az acr create 
-  --name <unique-registry-name>
-  --resource-group <resource-group>
+az acr create \
+  --name <unique-registry-name> \
+  --resource-group <resource-group> \
+  --location <region> \
   --sku Standard
 ```
 
@@ -54,7 +55,7 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az aks create` command to deploy your cluster. Refer to the docs linked in the Resources section, or run `az aks create -h` for details
-* The size and number of nodes in your cluster is not critical, but two or more nodes of type `Standard_DS2_v4` or larger is recommended
+* The size and number of nodes in your cluster is not critical, but two or more nodes of type `Standard_D2S_v4` or larger is recommended
 * You should give the cluster access to the container registry by “attaching” it
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
 
@@ -71,7 +72,7 @@ az aks create \
   --generate-ssh-keys \
   --node-count 2 \
   --generate-ssh-keys \
-  --node-vm-size Standard_DS2_v4 \
+  --node-vm-size Standard_D2S_v4 \
   --network-plugin azure \
   --attach-acr <registry-name>
 
