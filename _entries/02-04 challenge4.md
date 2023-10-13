@@ -6,6 +6,28 @@ parent-id: upandrunning
 ---
 
 Azure has a managed Kubernetes service, AKS (Azure Kubernetes Service), you will use this to easily deploy a Kubernetes cluster.
+Azure has also a managed registry service, ACR (Azure Container Registry), you will use ACR to push/pull your image.
+
+#### Create Azure Container Registry
+
+**Task Hints**
+
+* It's recommended to use the Azure CLI and the `az acr create` command to deploy your ACR. Refer to the docs linked in the Resources section, or run `az acr create -h` for details
+
+Create ACR
+
+{% collapsible %}
+
+```sh
+az acr create 
+  --name <unique-registry-name>
+  --resource-group <resource-group>
+  --sku Standard
+```
+
+{% endcollapsible %}
+
+This container registry will be attached later to your AKS cluster.
 
 #### Get the latest Kubernetes version available in AKS
 
@@ -33,7 +55,6 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 
 * It's recommended to use the Azure CLI and the `az aks create` command to deploy your cluster. Refer to the docs linked in the Resources section, or run `az aks create -h` for details
 * The size and number of nodes in your cluster is not critical, but two or more nodes of type `Standard_DS2_v4` or larger is recommended
-* Make sure to enable the [http_application_routing add-on](https://learn.microsoft.com/en-us/azure/aks/http-application-routing) when creating the cluster to simplify networking settings in the next challenges
 * You should give the cluster access to the container registry by “attaching” it
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
 
@@ -52,7 +73,6 @@ az aks create \
   --generate-ssh-keys \
   --node-vm-size Standard_DS2_v4 \
   --network-plugin azure \
-  --enable-addons http_application_routing \
   --attach-acr <registry-name>
 
 az aks nodepool add \
@@ -135,3 +155,5 @@ kubectl get all -n system
 > * <https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal>
 > * <https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#connect-to-the-cluster>
 > * <https://kubernetes.io/docs/reference/kubectl/cheatsheet/>
+> * <https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro>
+> * <https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-create()>
