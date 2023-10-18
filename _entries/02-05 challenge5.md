@@ -12,7 +12,7 @@ In this section, you will import an image (web app) from a public repository in 
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az acr import` command to import the image in your ACR. Refer to [ACR import image](https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-import()), or run `az acr import -h` for details
-* The image that will be imported is a hello world web app mcr.microsoft.com/azuredocs/aks-helloworld, please use tag v1
+* The image that will be imported is a hello world web app **[mcr.microsoft.com/azuredocs/aks-helloworld](mcr.microsoft.com/azuredocs/aks-helloworld)**, please use tag v1
 * Rename the image to aks-helloworld, tag v1
 
 Import image to ACR
@@ -28,7 +28,7 @@ az acr import \
 
 {% endcollapsible %}
 
-Check that your image was successfully imported.
+Check that your image was successfully imported. You can do it graphically (Web Portal) or using [the CLI](https://learn.microsoft.com/fr-fr/cli/azure/acr/repository?view=azure-cli-latest)
 
 {% collapsible %}
 
@@ -60,11 +60,12 @@ You should see an output similar to:
 
 #### Create a deployment manifest
 
-You need a deployment manifest file to deploy your application. The manifest file allows you to define what type of resource you want to deploy and all the details associated with the workload.
+The application is now in your own container registry so you don't rely on the availability of hub.docker.com. Now, you need a deployment manifest file to deploy your application. The manifest file allows you to define what type of resource you want to deploy and all the details associated with the workload.
 
 Kubernetes groups containers into logical structures called pods, which have no intelligence. Deployments add the missing intelligence to create your application.
 
 Create a deployment file, set container port to 80 and set the environment variable `TITLE` to `Hello, this is my first AKS deployment`.
+The application expect to run on port 80 and using 'http'.
 
 {% collapsible %}
 
@@ -90,13 +91,6 @@ spec:
       containers:
         - image: <registry-fqdn>/aks-helloworld:v1 # Replace registry-fqdn with the fully qualified name of your registry
           name: aks-helloworld
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 250m
-              memory: 256Mi
           ports:
             - name: http
               containerPort: 80

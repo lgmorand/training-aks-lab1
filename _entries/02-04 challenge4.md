@@ -132,7 +132,7 @@ Try some other commands like. Try to find them from the [documentation](https://
 * List all namespaces
 * List pods in namespace system
 * List pods in all namespaces
-* List all elements in namespace system
+* List all elements in namespace kube-system
 
 {% collapsible %}
 
@@ -140,12 +140,12 @@ Try some other commands like. Try to find them from the [documentation](https://
 kubectl get namespaces
 kubectl get ns
 
-kubectl get pods -n system
+kubectl get pods -n kube-system
 
 kubectl get pods --all-namespaces
 kubectl get pods -A
 
-kubectl get all -n system
+kubectl get all -n kube-system
 ```
 
 {% endcollapsible %}
