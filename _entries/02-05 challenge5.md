@@ -12,8 +12,8 @@ In this section, you will import an image (web app) from a public repository in 
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az acr import` command to import the image in your ACR. Refer to [ACR import image](https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-import()), or run `az acr import -h` for details
-* The image that will be imported is in [docker hub](https://hub.docker.com/r/paulbouwer/hello-kubernetes), please use tag 1.10.1
-* Rename the image to hello-kubernetes, tag 1.10.1
+* The image that will be imported is a hello world web app mcr.microsoft.com/azuredocs/aks-helloworld, please use tag v1
+* Rename the image to aks-helloworld, tag v1
 
 Import image to ACR
 
@@ -22,8 +22,8 @@ Import image to ACR
 ```sh
 az acr import \
   --name <registry_name> \
-  --source docker.io/paulbouwer/hello-kubernetes:1.10.1 \
-  --image hello-kubernetes:1.10.1
+  --source mcr.microsoft.com/azuredocs/aks-helloworld:v1 \
+  --image aks-helloworld:v1
 ```
 
 {% endcollapsible %}
@@ -40,19 +40,19 @@ You should see an output similar to:
 
 ```sh
 [
-  "hello-kubernetes"
+  "aks-helloworld"
 ]
 ```
 
 ```sh
-az acr repository show-tags -n <registry_name> --repository hello-kubernetes
+az acr repository show-tags -n <registry_name> --repository aks-helloworld
 ```
 
 You should see an output similar to:
 
 ```sh
 [
-  "1.10.1"
+  "v1"
 ]
 ```
 
@@ -64,7 +64,7 @@ You need a deployment manifest file to deploy your application. The manifest fil
 
 Kubernetes groups containers into logical structures called pods, which have no intelligence. Deployments add the missing intelligence to create your application.
 
-Create a deployment file and set the environment variable `GREETEE` to `AKS`.
+Create a deployment file, set container port to 80 and set the environment variable `TITLE` to `Hello, this is my first AKS deployment`.
 
 {% collapsible %}
 
@@ -75,21 +75,21 @@ Create a `deployment.yaml` file with the following contents, and make sure to re
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: aks-helloworld
 spec:
   selector: # Define the wrapping strategy
     matchLabels: # Match all pods with the defined labels
-      app: webapp # Labels follow the `name: value` template
+      app: aks-helloworld # Labels follow the `name: value` template
   template: # This is the template of the pod inside the deployment
     metadata:
       labels:
-        app: webapp
+        app: aks-helloworld
     spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: <registry-fqdn>/webapp # Registry created in challenge 3
-          name: webapp
+        - image: <registry-fqdn>/aks-helloworld:v1 # Replace registry-fqdn with the fully qualified name of your registry
+          name: aks-helloworld
           resources:
             requests:
               cpu: 100m
@@ -98,11 +98,11 @@ spec:
               cpu: 250m
               memory: 256Mi
           ports:
-            - containerPort: 80
-              name: http
+            - name: http
+              containerPort: 80
           env:
-            - name: GREETEE
-              value: AKS
+            - name: TITLE
+              value: Hello, this is my first AKS deployment        
 ```
 
 {% endcollapsible %}
@@ -122,14 +122,14 @@ kubectl apply -f ./deployment.yaml
 Then ensure it was successful:
 
 ```sh
-kubectl get deploy webapp
+kubectl get deploy aks-helloworld
 ```
 
 You should see an output similar to:
 
 ```sh
-NAME              READY   UP-TO-DATE   AVAILABLE   AGE
-webapp            0/1     1            0           16s
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+aks-helloworld   1/1     1            1           32s
 ```
 
 {% endcollapsible %}
@@ -146,37 +146,13 @@ You should see an output similar to:
 
 ```sh
 NAME                               READY   STATUS    RESTARTS   AGE
-webapp-7c58c5f699-r79mv            1/1     Running   0          63s
+aks-helloworld-7bb8fc8c5-vksfc     1/1     Running   0          55s
 ```
-
-{% endcollapsible %}
-
-#### Test the app
-
-Make a request to the newly deployed web app and ensure it returns `Hello AKS`.
-
-**Task Hints**
-
-* Use port forwarding with `kubectl port-forward` to directly access pods in the AKS cluster
-
-{% collapsible %}
-
-Use `kubectl port-forward` to directly access a pod:
-
-```sh
-# Replace <pod-name> with the name returned by kubectl get pods
-# Replace <local-port> with a port number on your machine, e.g. 4000
-# Replace <pod-port> with the port number on which the pod listens for requests, e.g. 80
-kubectl port-forward <pod-name> <local-port>:<pod-port>
-```
-
-You can now load the URL `http://localhost:4000/` on your browser and ensure it returns `Hello AKS`.
 
 {% endcollapsible %}
 
 > **Resources**
 >
 > * <https://kubernetes.io/docs/concepts/workloads/controllers/deployment/>
-> * <https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/>
+> * <https://kubernetes.io/docs/concepts/services-networking/service/>
 > * <https://learn.microsoft.com/en-us/training/modules/aks-deploy-container-app/5-exercise-deploy-app/>
-> * <https://learn.microsoft.com/en-us/azure/aks/node-access/>
