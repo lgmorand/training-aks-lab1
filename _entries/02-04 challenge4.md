@@ -42,7 +42,7 @@ Get the latest available Kubernetes version in your preferred region and store i
 version=$(az aks get-versions -l <region> --query 'values[] | [0].version' -o tsv)
 ```
 
-The command above returns the newest version of Kubernetes available to deploy using AKS. Newer Kubernetes releases are typically made available in “Preview”. To get the latest non-preview version of Kubernetes, use the following command instead.
+The command above returns the newest version of Kubernetes available to deploy using AKS. Newer Kubernetes releases are typically made available in “Preview”. To get the latest non-preview (a.k.a the 'stable') version of Kubernetes, use the following command instead.
 
 ```sh
 version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].version' -o tsv)
@@ -55,9 +55,10 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az aks create` command to deploy your cluster. Refer to the docs linked in the Resources section, or run `az aks create -h` for details
-* The size and number of nodes in your cluster is not critical, but two or more nodes of type `Standard_D2S_v4` or larger is recommended
+* The size and number of nodes in your cluster is not critical, but two nodes of type `Standard_D2S_v4` or larger is recommended
 * You should give the cluster access to the container registry by “attaching” it
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
+* the cluster must have a second nodepool with 2 VMs, with SKU 'Standard_B2s'
 
 Create AKS using the latest version
 
@@ -89,9 +90,10 @@ The userpool is used to isolate the pods you will create from the default one ma
 ![Node pools](./media/aks-node-pools.png "Node pools")
 
 > **Notes**
-
-* You can optionally enable the autoscaler using the options `--enable-cluster-autoscaler`, `--min-count`, and `--max-count` in `az aks create`.
-* You can attach an ACR registry to an existing AKS cluster using `az aks update -n <cluster-name> -g <resource-group> --attach-acr <registry-name>`
+>
+> You can optionally enable the autoscaler using the options `--enable-cluster-autoscaler`, `--min-count`, and `--max-count` in `az aks create`.
+>
+> You can attach an ACR registry to an existing AKS cluster using `az aks update -n <cluster-name> -g <resource-group> --attach-acr <registry-name>`
 
 {% endcollapsible %}
 

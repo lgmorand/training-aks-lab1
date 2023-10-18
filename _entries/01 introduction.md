@@ -14,15 +14,3 @@ Some things you’ll be going through:
 
 - Create Kubernetes cluster
 - Deploying the app to AKS and accessing it publicly
-- Monitoring the app with Azure Monitor
-
-The lab will also include optional sections to dive deeper into the following topics:
-
-<!-- - Deploying multiple microservices -->
-<!-- - Application performance monitoring -->
-<!-- - Entreprise governance -->
-- Detecting cost optimization opportunities
-- Handling load spikes
-<!-- - Resilience -->
-<!-- - Using managed identities to connect to other Azure Services -->
-<!-- - Easy deployments with Helm -->
