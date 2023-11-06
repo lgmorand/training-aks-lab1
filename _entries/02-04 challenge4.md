@@ -72,7 +72,6 @@ az aks create \
   --kubernetes-version $version \
   --generate-ssh-keys \
   --node-count 2 \
-  --generate-ssh-keys \
   --node-vm-size Standard_D2S_v4 \
   --network-plugin azure \
   --attach-acr <registry-name>
