@@ -60,6 +60,8 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
 * the cluster must have a second nodepool with 2 VMs, with SKU 'Standard_B2s'
 
+> **Warning**: please attach the ACR with a second command. You could create it with the az aks command but some proxies (zscaler) make the command fail.
+
 Create AKS using the latest version
 
 {% collapsible %}
@@ -74,7 +76,6 @@ az aks create \
   --node-count 2 \
   --node-vm-size Standard_D2S_v4 \
   --network-plugin azure \
-  --attach-acr <registry-name>
 
 az aks nodepool add \
   --resource-group <resource-group> \
@@ -82,6 +83,12 @@ az aks nodepool add \
   --name userpool \
   --node-count 2 \
   --node-vm-size Standard_B2s
+```
+
+Attach the ACR
+
+```bash
+az aks update -n myAKSCluster -g myResourceGroup --attach-acr <acr-name>
 ```
 
 The userpool is used to isolate the pods you will create from the default one managed by the Kubernetes system and you should see something like this:
