@@ -23,6 +23,8 @@ Alternatively, you need to meet the following requirements:
 
 Open any terminal, either a local one (PowerShell, WSL, VSCode terminal or Cloud Shell) and log in to your personal subscription. In parallel, log in to the [the Azure Portal](https://portal.azure.com).
 
+> **Warning**: Ensure that you are connected to the right subscription. The CLI may be connected to the wrong one
+
 {% collapsible %}
 
 Please consider using your username and password to login into [the Azure Portal](https://portal.azure.com). Also, please authenticate your Azure CLI by running the command below on your machine and following the instructions.
@@ -31,6 +33,8 @@ Please consider using your username and password to login into [the Azure Portal
 az account show
 az login
 ```
+
+If you need to select a specific subscription, use the command *az account set*
 
 {% endcollapsible %}
 
