@@ -21,6 +21,8 @@ Alternatively, you need to meet the following requirements:
 
 #### If you have an Azure subscription
 
+Open any terminal, either a local one (PowerShell, WSL, VSCode terminal or Cloud Shell) and log in to your personal subscription. In parallel, log in to the [the Azure Portal](https://portal.azure.com).
+
 {% collapsible %}
 
 Please consider using your username and password to login into [the Azure Portal](https://portal.azure.com). Also, please authenticate your Azure CLI by running the command below on your machine and following the instructions.
