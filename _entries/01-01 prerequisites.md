@@ -40,7 +40,7 @@ If you need to select a specific subscription, use the command *az account set*
 
 #### Azure Cloud Shell
 
-You can use the Azure Cloud Shell accessible at <https://shell.azure.com> once you log in with an Azure subscription.
+Prefer the local command line but if you are stuck, you can use the Azure Cloud Shell accessible at <https://shell.azure.com> once you log in with an Azure subscription.
 
 {% collapsible %}
 
