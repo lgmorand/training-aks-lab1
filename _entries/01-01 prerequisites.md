@@ -23,7 +23,7 @@ Alternatively, you need to meet the following requirements:
 
 Open any terminal, either a local one (PowerShell, WSL, VSCode terminal or Cloud Shell) and log in to your personal subscription. In parallel, log in to the [the Azure Portal](https://portal.azure.com).
 
-> **Warning**: Ensure that you are connected to the right subscription. The CLI may be connected to the wrong one
+> **Warning**: Ensure that you are connected to the right subscription. The CLI may be connected to the wrong one! Use the az account show to be sure that you are targeting the right subcription!
 
 {% collapsible %}
 
@@ -69,3 +69,11 @@ You should now have access to the Azure Cloud Shell
 - You can use `code <file you want to edit>` in Azure Cloud Shell to open the built-in text editor.
 - You can upload files to the Azure Cloud Shell by dragging and dropping them
 - You can also do a `curl -o filename.ext https://file-url/filename.ext` to download a file from the internet.
+
+#### Registering Network module
+
+As a test, with your command line and once logged on the right subscription, run the following command
+
+```
+az provider register --namespace Microsoft.Network
+```
