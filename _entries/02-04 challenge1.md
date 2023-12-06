@@ -58,7 +58,7 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 * The size and number of nodes in your cluster is not critical, but two nodes of type `Standard_D2S_v4` or larger is recommended
 * You should give the cluster access to the container registry by “attaching” it
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
-* the cluster must have a second nodepool with 2 VMs, with SKU 'Standard_B2s'
+* the cluster must have a second nodepool with 2 VMs, with SKU 'Standard_B2s' (if you have an error with a quota filled, just don't create the second nodepool, that's OK)
 
 > **Warning**: please attach the ACR with a second command. You could create it with the az aks command but some proxies (zscaler) make the command fail.
 
@@ -73,7 +73,8 @@ az aks create \
   --location <region> \
   --kubernetes-version $version \
   --generate-ssh-keys \
-  --node-count 2 \
+  --node-count 2 
+  --network-plugin azure \
   --node-vm-size Standard_D2S_v4 \
   --network-plugin azure \
 
