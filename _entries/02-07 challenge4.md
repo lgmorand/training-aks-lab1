@@ -29,6 +29,8 @@ spec:
 
 {% endcollapsible %}
 
+> warning: it is possible that it does not work. it's because when you created the cluster, you didn't enable the network plugin and thus, all network policies are disabled by default. thus, you must **recreate** the cluster from scratch, and use the parameter --network-plugin
+
 #### Enable again the traffic from Internet
 
 Now, without removing the DenyAll policy, add a second policy, specically applied to your pod to allow traffic coming from Internet.
