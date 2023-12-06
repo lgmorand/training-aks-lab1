@@ -15,9 +15,10 @@ In this section, you will import an image (web app) from a public repository in 
 * The image that will be imported is a hello world web app **[mcr.microsoft.com/azuredocs/aks-helloworld](mcr.microsoft.com/azuredocs/aks-helloworld)**, please use tag v1
 * Rename the image to aks-helloworld, tag v1
 
-Import image to ACR
+> Warning: if you get error during the command or can't see container images in the portal, it means that you don't have enough right. You need to add yourself as contributor to the ACR.
 
 {% collapsible %}
+Import image to ACR
 
 ```sh
 az acr import \
