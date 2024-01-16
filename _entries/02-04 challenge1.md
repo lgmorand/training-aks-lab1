@@ -76,7 +76,7 @@ az aks create \
   --node-count 2 
   --network-plugin azure \
   --node-vm-size Standard_A2_v2 \
-  --network-plugin azure \
+  --network-policy azure \
 
 az aks nodepool add \
   --resource-group <resource-group> \
