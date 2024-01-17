@@ -17,14 +17,16 @@ Once deployed, check if you can still access your application.
 {% collapsible %}
 
 ```yaml
-kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
-  name: web-deny-all
+  name: default-deny
+  namespace: default
 spec:
   podSelector: {}
-  ingress: []
-  egress: []
+  policyTypes:
+  - Ingress
+  - Egress
 ```
 
 {% endcollapsible %}
