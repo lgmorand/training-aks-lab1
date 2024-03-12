@@ -25,10 +25,10 @@ jobs:
 
 
 
-      - uses: azure/CLI@v1
+      - uses: azure/CLI@v2
         name: Deploy
         with:
-          azcliversion: 2.53.0
+          azcliversion: 2.58.0
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
 
