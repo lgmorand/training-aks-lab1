@@ -3,19 +3,6 @@ name: Build and deploy
 on:
   push:
   workflow_dispatch:
-    inputs:
-    STORAGE_NAME:
-      description: 'Storage Name'     
-      required: true
-      default: 'stolabakslgm1'
-    REGION:
-      description: 'Location' 
-      required: true
-      default: 'westeurope'
-    RESOURCE_GROUP:
-      description: 'Resource Group' 
-      required: true
-      default: 'rg-lab-aks'
 
 jobs:
   build:
@@ -36,20 +23,6 @@ jobs:
       - run: make build
         name: Build sources
 
-      - name: AZ Login
-        run: az login --service-principal -u ${{ vars.AZ_LOGIN }} -p ${{ secrets.AZ_PASSWORD }} --tenant ${{ vars.AZ_TENANT }}
-
-      - name: Create RG
-        run: |
-          az group create -n ${{ github.event.inputs.RESOURCE_GROUP }} -l ${{ github.event.inputs.REGION }} -o none
- 
-      - name: Create storage
-        run: |
-          az storage account create --name ${{ github.event.inputs.STORAGE_NAME }} --resource-group ${{ github.event.inputs.RESOURCE_GROUP }} -l ${{ github.event.inputs.REGION }} -o none
-          az storage blob service-properties update --account-name ${{ github.event.inputs.STORAGE_NAME }} --static-website  --index-document "index.html"
-          CONNECTION_STRING=$('az storage account show-connection-string --name ${{ github.event.inputs.STORAGE_NAME }} --resource-group ${{ github.event.inputs.RESOURCE_GROUP }} --query 'connectionString' -o tsv)
-          echo $CONNECTION_STRING
-          echo "CONNECTION_STRING=$CONNECTION_STRING" >> $GITHUB_OUTPUT
  
       - uses: azure/CLI@v2
         name: Deploy
