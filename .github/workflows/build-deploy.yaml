@@ -34,4 +34,4 @@ jobs:
             az storage azcopy blob sync \
               --container "\$web" \
               --source "_site" \
-              --connection-string $CONNECTION_STRING
+              --connection-string "${{ secrets.CONNECTION_STRING }}"
