@@ -12,7 +12,7 @@ Azure has also a managed registry service, ACR (Azure Container Registry), you w
 
 **Task Hints**
 
-* It's recommended to use the Azure CLI and the `az acr create` command to deploy your ACR. Refer to the docs linked in the Resources section, or run `az acr create -h` for details
+* It's recommended to use the Azure CLI and the `az acr create` command to deploy your ACR. Refer to the docs linked in the Resources section, or run `az acr create -h` for details. if you don't have a resource group yet, don't forget to create it first ;-)
 
 Create ACR
 
