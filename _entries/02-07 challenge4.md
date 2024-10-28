@@ -31,7 +31,7 @@ spec:
 
 {% endcollapsible %}
 
-> warning: it is possible that it does not work. it's because when you created the cluster, you didn't enable the network plugin and thus, all network policies are disabled by default. thus, you must **recreate** the cluster from scratch, and use the parameter --network-policy
+> warning: it is possible that it does **not** work. it's because when you created the cluster, you didn't enable the network plugin and thus, all network policies are ignored by default. thus, you must **recreate** the cluster from scratch, and use the parameter --network-policy and use a plugin such as calico
 
 #### Enable again the traffic from Internet
 
