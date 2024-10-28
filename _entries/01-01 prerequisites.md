@@ -70,10 +70,12 @@ You should now have access to the Azure Cloud Shell
 - You can upload files to the Azure Cloud Shell by dragging and dropping them
 - You can also do a `curl -o filename.ext https://file-url/filename.ext` to download a file from the internet.
 
-#### Registering Network module
+#### Registering some modules
 
 As a test, with your command line and once logged on the right subscription, run the following command
 
 ```
 az provider register --namespace Microsoft.Network
+az provider register --namespace Microsoft.ContainerService
+az provider register --namespace Microsoft.Compute
 ```
