@@ -12,7 +12,7 @@ In this section, you will import an image (web app) from a public repository in 
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az acr import` command to import the image in your ACR. Refer to [ACR import image](https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-import()), or run `az acr import -h` for details
-* The image that will be imported is a hello world web app **[mcr.microsoft.com/azuredocs/aks-helloworld](mcr.microsoft.com/azuredocs/aks-helloworld)**, please use tag v1
+* The image that will be imported is a hello world web app **[lgmorand/catnip](docker.io/lgmorand/catnip)**, please use tag v1
 * Rename the image to aks-helloworld, tag v1
 
 > Warning: if you get error during the command or can't see container images in the portal, it means that you don't have enough right. You need to add yourself as contributor to the ACR.
@@ -23,7 +23,7 @@ Import image to ACR
 ```sh
 az acr import \
   --name <registry_name> \
-  --source mcr.microsoft.com/azuredocs/aks-helloworld:v1 \
+  --source docker.io/lgmorand/catnip:v1 \
   --image aks-helloworld:v1
 ```
 
@@ -65,12 +65,11 @@ The application is now in your own container registry so you don't rely on the a
 
 Kubernetes groups containers into logical structures called pods, which have no intelligence. Deployments add the missing intelligence to create your application.
 
-Create a deployment file, set container port to 80 and set the environment variable `TITLE` to `Hello, this is my first AKS deployment`.
-The application expect to run on port 80 and using 'http'.
+Create a deployment file to deploy your application. The application expect to run on port 5000 and using 'http'.
 
 {% collapsible %}
 
-Create a `deployment.yaml` file with the following contents, and make sure to replace `<registry-fqdn>` with the fully qualified name of your registry:
+Create a `deployment.yaml` file with the following contents, and make sure to replace `<registry-fqdn>` with the fully qualified name of YOUR registry (FQDN = full server URL):
 
 ```yaml
 # deployment.yaml
@@ -90,14 +89,11 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: <registry-fqdn>/aks-helloworld:v1 # Replace registry-fqdn with the fully qualified name of your registry
+        - image: <YOUR-registry-fqdn>/aks-helloworld:v1 # Replace registry-fqdn with the fully qualified name of your registry
           name: aks-helloworld
           ports:
             - name: http
-              containerPort: 80
-          env:
-            - name: TITLE
-              value: Hello, this is my first AKS deployment        
+              containerPort: 5000   
 ```
 
 {% endcollapsible %}

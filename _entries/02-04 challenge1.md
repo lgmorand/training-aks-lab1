@@ -60,7 +60,7 @@ version=$(az aks get-versions -l <region> --query 'values[?!isPreview] | [0].ver
 * You can optionally create AKS clusters that support the [cluster autoscaler](https://docs.microsoft.com/en-us/azure/aks/cluster-autoscaler#about-the-cluster-autoscaler). We will focus more on this in the advanced sections
 * the cluster must have a second nodepool with 2 VMs, with SKU 'Standard_B2s' (if you have an error with a quota filled, just don't create the second nodepool, that's OK)
 
-> **Warning**: please attach the ACR with a second command. You could create it with the az aks command but some proxies (zscaler) make the command fail.
+> **Warning**: please attach the ACR with a second command (az aks update --attach-acr). You could create it with the az aks command but some proxies (zscaler) make the command fail.
 
 Create AKS using the latest version
 

@@ -12,7 +12,7 @@ In this section, you will expose the application by creating a [Service](https:/
 
 #### Test the app
 
-Make a request to the newly deployed web app and ensure it returns `Hello, this is my first AKS deployment`.
+Make a request to the newly deployed web app and ensure it displays something in your browser using the port 80. Warning the exposed port is not the same than the one expected by the application.
 
 **Task Hints**
 
@@ -36,7 +36,7 @@ spec:
     - port: 80 # SERVICE exposed port
       name: http # SERVICE port name
       protocol: TCP # The protocol the SERVICE will listen to
-      targetPort: http # Port to forward to in the POD    
+      targetPort: 5000 # Port to forward to in the POD    
 ```
 
 Deploy the service:
