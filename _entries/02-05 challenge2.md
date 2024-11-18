@@ -12,7 +12,7 @@ In this section, you will import an image (web app) from a public repository in 
 **Task Hints**
 
 * It's recommended to use the Azure CLI and the `az acr import` command to import the image in your ACR. Refer to [ACR import image](https://learn.microsoft.com/en-us/cli/azure/acr?view=azure-cli-latest#az-acr-import()), or run `az acr import -h` for details
-* The image that will be imported is a hello world web app **[lgmorand/catnip](docker.io/lgmorand/catnip)**, please use tag v1
+* The image that will be imported is a hello world web app **[docker.io/lgmorand/catnip](docker.io/lgmorand/catnip)**, please use tag v1
 * Rename the image to aks-helloworld, tag v1
 
 > Warning: if you get error during the command or can't see container images in the portal, it means that you don't have enough right. You need to add yourself as contributor to the ACR.
