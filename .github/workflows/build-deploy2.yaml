@@ -1,4 +1,4 @@
-name: Build and deploy
+name: Build, create infra & deploy
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
         run: |
           az storage account create -n ${{ github.event.inputs.STORAGE_NAME }}  -g ${{ github.event.inputs.RESOURCE_GROUP }}  --kind StorageV2 
           az storage blob service-properties update --account-name ${{ github.event.inputs.STORAGE_NAME }} --static-website  --index-document "index.html" --404-document "error.html"
-          CONNECTION_STRING=$(az storage account show-connection-string --name stoadp --resource-group rg_adp -o tsv)
+          
           printf $"\e[32m\u2714 Success \e[0m\n\n"
         
       - uses: azure/CLI@v2
@@ -54,7 +54,8 @@ jobs:
           azcliversion: 2.67.0
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
-
+            CONNECTION_STRING=$(az storage account show-connection-string --name stoadp --resource-group rg_adp -o tsv)
+            echo $CONNECTION_STRING
             az storage azcopy blob sync \
               --container "\$web" \
               --source "_site" \
