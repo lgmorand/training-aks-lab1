@@ -59,3 +59,7 @@ jobs:
               --container "\$web" \
               --source "_site" \
               --connection-string "$CONNECTION_STRING"
+
+            URL=$(az storage account show --name stoadp --resource-group rg_adp --query "primaryEndpoints.web" --output tsv)
+            echo $URL
+            echo "::notice::$URL"
