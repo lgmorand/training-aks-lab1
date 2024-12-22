@@ -1,7 +1,6 @@
 name: Build, create infra & deploy
 
 on:
-  push:
   workflow_dispatch:
     inputs:
         STORAGE_NAME:
