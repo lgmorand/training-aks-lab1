@@ -73,7 +73,7 @@ az aks create \
   --location <region> \
   --kubernetes-version $version \
   --generate-ssh-keys \
-  --node-count 2 
+  --node-count 2 \
   --network-plugin azure \
   --node-vm-size Standard_A2_v2 \
   --network-policy calico \
