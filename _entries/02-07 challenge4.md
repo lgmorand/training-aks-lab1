@@ -10,7 +10,7 @@ Now that your application is exposed, you are going to test how network policies
 #### Block all traffic
 
 A general good practice with network security is to block all traffic by default (in both ways) and then whitelist the allowed traffic.
-Create a [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/) applied to all pod in your namespace. Block ALL traffic in ingress and egress. 
+Create a [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/) applied to all pods in your namespace. Block ALL traffic in ingress and egress. 
 
 Once deployed, check if you can still access your application.
 
@@ -31,11 +31,11 @@ spec:
 
 {% endcollapsible %}
 
-> warning: it is possible that it does **not** work. it's because when you created the cluster, you didn't enable the network plugin and thus, all network policies are ignored by default. thus, you must **recreate** the cluster from scratch, and use the parameter --network-policy and use a plugin such as calico
+> **Warning**: It is possible that it does **not** work. It's because when you created the cluster, you didn't enable the network plugin and thus, all network policies are ignored by default. Thus, you must **recreate** the cluster from scratch, and use the parameter --network-policy and use a plugin such as calico
 
 #### Enable again the traffic from Internet
 
-Now, without removing the DenyAll policy, add a second policy, specically applied to your pod to allow traffic coming from Internet.
+Now, without removing the DenyAll policy, add a second policy, specifically applied to your pod to allow traffic coming from Internet.
 Once again, deploy it and check that you can now access to your application.
 
 {% collapsible %}
@@ -55,4 +55,4 @@ spec:
 
 {% endcollapsible %}
 
-Easy, isn't it ?
+Easy, isn't it?
