@@ -17,7 +17,7 @@ Make a request to the newly deployed web app and ensure it displays something in
 **Task Hints**
 
 * Create a service with a public IP to expose your web app
-* Expose the Service externally using an external load balancer. Try to find the right service type to use in the [documentation](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)  
+* Expose the Service externally using an external load balancer. Try to find the right service type to use in the [documentation](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)
 
 {% collapsible %}
 

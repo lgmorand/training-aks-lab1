@@ -29,7 +29,7 @@ az acr import \
 
 {% endcollapsible %}
 
-Check that your image was successfully imported. You can do it graphically (Web Portal) or using [the CLI](https://learn.microsoft.com/fr-fr/cli/azure/acr/repository?view=azure-cli-latest)
+Check that your image was successfully imported. You can do it graphically (Web Portal) or using [the CLI](https://learn.microsoft.com/en-us/cli/azure/acr/repository?view=azure-cli-latest)
 
 {% collapsible %}
 
