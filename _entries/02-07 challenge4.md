@@ -36,7 +36,7 @@ spec:
 #### Enable again the traffic from Internet
 
 Now, without removing the DenyAll policy, add a second policy, specifically applied to your pod to allow traffic coming from Internet.
-Once again, deploy it and check that you can now access to your application.
+Once again, deploy it and check that you can now access your application.
 
 {% collapsible %}
 

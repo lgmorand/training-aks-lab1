@@ -12,12 +12,12 @@ In this section, you will expose the application by creating a [Service](https:/
 
 #### Test the app
 
-Make a request to the newly deployed web app and ensure it displays something in your browser using the port 80. Warning the exposed port is not the same than the one expected by the application.
+Make a request to the newly deployed web app and ensure it displays something in your browser using port 80. Warning: the exposed port is not the same as the one expected by the application.
 
 **Task Hints**
 
-* Create a service with a public IP to expose you web app
-* Exposes the Service externally using an external load balancer. Try to find the right service type to use in the [documentation](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)  
+* Create a service with a public IP to expose your web app
+* Expose the Service externally using an external load balancer. Try to find the right service type to use in the [documentation](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types)  
 
 {% collapsible %}
 
