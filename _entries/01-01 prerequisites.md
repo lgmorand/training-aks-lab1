@@ -13,9 +13,9 @@ You can use [the Azure Cloud Shell service](https://shell.azure.com) once you lo
 
 Alternatively, you need to meet the following requirements:
 
-- [Azure CLI](https://github.com/Azure/azure-cli) v2.53.0 (or superior)
-- [kubectl](https://github.com/kubernetes/kubectl) v0.26.9+
-- [Kubernetes](https://kubernetes.io) v1.26+ (managed from [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks))
+- [Azure CLI](https://github.com/Azure/azure-cli) v2.83.0 (or superior)
+- [kubectl](https://github.com/kubernetes/kubectl) v0.32.0+
+- [Kubernetes](https://kubernetes.io) v1.32+ (managed from [Azure Kubernetes Service](https://learn.microsoft.com/en-us/azure/aks))
 
 ### Azure subscription
 
