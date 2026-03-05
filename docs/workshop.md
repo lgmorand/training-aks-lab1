@@ -106,6 +106,7 @@ As a test, with your command line and once logged on the right subscription, run
 az provider register --namespace Microsoft.Network
 az provider register --namespace Microsoft.ContainerService
 az provider register --namespace Microsoft.Compute
+az provider register --namespace Microsoft.ContainerRegistry
 ```
 
 ## Container and Kubernetes basics
